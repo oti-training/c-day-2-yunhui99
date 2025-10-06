@@ -1,0 +1,45 @@
+{
+  "tests": [
+    {
+      "name": "Test 1: Basic GDB Inspection",
+      "setup": "sudo apt-get update && sudo apt-get install -y gcc make libc6-dev gdb",
+      "run": "make clean && make all && ./tests/test_basic",
+      "input": "",
+      "output": "✓ all tests passed!",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 25
+    },
+    {
+      "name": "Test 2: Segfault Debugger",
+      "setup": "sudo apt-get update && sudo apt-get install -y gcc make libc6-dev gdb",
+      "run": "make clean && make all && ./tests/test_memory",
+      "input": "",
+      "output": "✓ all tests passed!",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 25
+    },
+    {
+      "name": "Test 3: Logic Error Hunt",
+      "setup": "sudo apt-get update && sudo apt-get install -y gcc make libc6-dev gdb",
+      "run": "make clean && make all && ./tests/test_validation",
+      "input": "",
+      "output": "✓ all tests passed!",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 25
+    },
+    {
+      "name": "Test 4: Data Corruption Debug",
+      "setup": "sudo apt-get update && sudo apt-get install -y gcc make libc6-dev gdb",
+      "run": "make clean && make all && ./tests/test_data",
+      "input": "",
+      "output": "✓ all tests passed!",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 25
+    }
+  ]
+}
+

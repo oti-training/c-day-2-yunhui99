@@ -1,0 +1,86 @@
+name: Autograding Tests
+
+on:
+  - push
+  - repository_dispatch
+
+permissions:
+  checks: write
+  actions: read
+  contents: read
+
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y gcc make libc6-dev gdb
+
+    - name: Test 1 - Basic GDB Inspection
+      id: test-1
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Test 1 - Basic GDB Inspection
+        setup-command: 'make clean && make all'
+        command: ./tests/test_basic
+        input: ''
+        expected-output: '✓ all tests passed!'
+        comparison-method: contains
+        timeout: 10
+        max-score: 25
+
+    - name: Test 2 - Segfault Debugger
+      id: test-2
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Test 2 - Segfault Debugger
+        setup-command: 'make clean && make all'
+        command: ./tests/test_memory
+        input: ''
+        expected-output: '✓ all tests passed!'
+        comparison-method: contains
+        timeout: 10
+        max-score: 25
+
+    - name: Test 3 - Logic Error Hunt
+      id: test-3
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Test 3 - Logic Error Hunt
+        setup-command: 'make clean && make all'
+        command: ./tests/test_validation
+        input: ''
+        expected-output: '✓ all tests passed!'
+        comparison-method: contains
+        timeout: 10
+        max-score: 25
+
+    - name: Test 4 - Data Corruption Debug
+      id: test-4
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Test 4 - Data Corruption Debug
+        setup-command: 'make clean && make all'
+        command: ./tests/test_data
+        input: ''
+        expected-output: '✓ all tests passed!'
+        comparison-method: contains
+        timeout: 10
+        max-score: 25
+
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        TEST-1_RESULTS: "${{steps.test-1.outputs.result}}"
+        TEST-2_RESULTS: "${{steps.test-2.outputs.result}}"
+        TEST-3_RESULTS: "${{steps.test-3.outputs.result}}"
+        TEST-4_RESULTS: "${{steps.test-4.outputs.result}}"
+      with:
+        runners: test-1,test-2,test-3,test-4
+
