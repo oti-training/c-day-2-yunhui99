@@ -14,7 +14,7 @@
 
 int is_valid_power(float power) {
     // TODO: Debug this - check the condition for exact limit (5.0f)
-    if (power < 5.0f) {
+    if (power <= 5.0f) {
         return 1;  // Valid
     } else {
         return 0;  // Invalid

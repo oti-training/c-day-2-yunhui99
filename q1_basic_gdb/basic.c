@@ -16,7 +16,7 @@ int validate_loop(int size) {
     int all_valid = 1;
 
     // TODO: Debug this loop - there's an off-by-one error
-    for (int i = 0; i <= size; i++) {
+    for (int i = 0; i < size; i++) {
         if (flags[i] != 1) {
             all_valid = 0;
             break;
